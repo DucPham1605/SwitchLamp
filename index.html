@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lamp Switch</title>
+</head>
+<body>
+<script>
+    function Lamp(){
+        this.status = false;
+        this.connectedToSwitch = false;
+        this.turnOn = function () {
+            if(this.connectedToSwitch) {
+                 return this.status = true;
+            }
+        }
+        this.turnOff = function() {
+            if(this.connectedToSwitch) {
+                return this.status = false;
+            }
+        }
+        this.light = function () {
+            if(this.status){
+                document.write("Đèn đang bật" + "<br>");
+            }
+            else{
+                document.write("Đèn đang tắt" + "<br>");
+            }
+        }
+    }
+
+    function Switch(lamp){
+
+        this.connect = function () {
+            lamp.connectedToSwitch = true;
+            document.write("Công tắc đã được kết nối với đèn" + "<br>");
+        }
+        this.switchOn = function () {
+            document.write("Bật công tắc");
+            lamp.turnOn();
+        }
+        this.switchOff = function () {
+            document.write("Tắt công tắc");
+            lamp.turnOff();
+        }
+    }
+
+    let lamp = new Lamp();
+    let new_switch = new Switch(lamp);
+
+    new_switch.connect();
+    for (let i=0;i<5;i++){
+            new_switch.switchOn();
+            lamp.light();
+            new_switch.switchOff();
+            lamp.light();
+    }
+</script>
+</body>
+</html>
